@@ -1,0 +1,19 @@
+create table usuario (
+    id_usuario serial primary key,
+    nome varchar(100) not null,
+    email varchar(100) not null
+);
+
+create table tarefa (
+    id_tarefa serial primary key,
+    id_usuario int not null,
+    descricao text not null,
+    nome_setor varchar(100) not null,
+    prioridade varchar(10) check (prioridade in ('baixa', 'média', 'alta')) not null,
+    data_cadastro date not null default current_date,
+    status varchar(10) check (status in ('a fazer', 'fazendo', 'pronto')) not null default 'a fazer',
+    constraint fk_usuario foreign key (id_usuario) references  usuario (id_usuario)
+);
+
+
+select * from usuario
